@@ -11,3 +11,6 @@ Italia:
 
 France:
 	$(CC) $(CFLAGS) France.c $(LIB) $(LDFLAGS)
+
+TEST:
+	$(CC) $(CFLAGS) test.c $(LIB) $(LDFLAGS)

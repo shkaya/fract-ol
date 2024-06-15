@@ -69,9 +69,9 @@ int	get_color(int iter, int max)
     	double t = (double)iter / max;
         // (double)でキャストしていない -> intで処理されて0になってた?
     
-    	int	r = (int)(9 * t * t * t * 255); //　赤色成分の計算
-    	int	g = (int)(15 * (1 - t) * t * t * 255); // 緑色成分の計算
-    	int	b = (int)(8.5 * (1 - t) * (1 - t) * t * 255); // 青色成分の計算
+    	int	r = (int)(9 * t * t * t * 256); //　赤色成分の計算
+    	int	g = (int)(15 * (1 - t) * t * t * 256); // 緑色成分の計算
+    	int	b = (int)(8.5 * (1 - t) * (1 - t) * t * 256); // 青色成分の計算
     	// (1 - t)とtがあることで、どちらかに偏っていた時、必ず0に近くなる。
     	return (r << 16 | g << 8 | b);
     }

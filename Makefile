@@ -1,16 +1,23 @@
 CC = gcc
+NAME = fractol
 CFLAGS = -Wall -Wextra -Werror
-LIB = minilibx-linux/libmlx_Darwin.a
-LDFLAGS = -L/usr/X11/lib -lX11 -lXext -lm
+LDFLAGS = minilibx-linux/libmlx_Darwin.a -L/usr/X11/lib -lX11 -lXext -lm
+SRCS = mlx.c \
+	mandelbrot.c \
 
-all:
-	$(CC) $(CFLAGS) fractol.c $(LIB) $(LDFLAGS)
+OBJS = $(SRCS:%.c=%.o);
 
-Italia:
-	$(CC) $(CFLAGS) Italia.c $(LIB) $(LDFLAGS)
+# この下のターゲットが実行されないのはなぜ？
+%.o: %.c
+		$(CC) $(CFLAGS) -c $< -o $@
 
-France:
-	$(CC) $(CFLAGS) France.c $(LIB) $(LDFLAGS)
+all: $(NAME)
 
-TEST:
-	$(CC) $(CFLAGS) test.c $(LIB) $(LDFLAGS)
+# 依存ファイルにOBJSを指定するのを忘れていた。
+$(NAME): $(OBJS)
+		$(CC) $(CFLAGS) main.c $(LDFLAGS) $(OBJS)
+
+clean:
+		rm -f *.o
+
+.PHONY: all clean

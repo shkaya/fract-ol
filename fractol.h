@@ -29,5 +29,7 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color);
 int	get_color(int iter, int max);
 void	draw_mandelbrot(t_data *data);
 
+// ジュリア集合を作る関数
+void	draw_julia(t_data *data, double c_re, double c_im);
 
 #endif

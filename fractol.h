@@ -23,11 +23,10 @@ typedef struct s_data
 
 // mlx,window,imgを作成する関数
 void	init_mlx(t_data *data);
-void	put_pixel_to_image(t_data *data, int x, int y, int color);
-int	get_color(int iter, int max);
-
 
 // マンデルブロ集合を作る関数
+void	put_pixel_to_image(t_data *data, int x, int y, int color);
+int	get_color(int iter, int max);
 void	draw_mandelbrot(t_data *data);
 
 

@@ -16,9 +16,11 @@ all: $(NAME)
 
 # 依存ファイルにOBJSを指定するのを忘れていた。
 $(NAME): $(OBJS)
+		$(MAKE) -C ./minilibx-linux
 		$(CC) $(CFLAGS) main.c $(LDFLAGS) $(OBJS)
 
 clean:
+		$(MAKE) clean -C ./minilibx-linux
 		rm -f *.o
 
 .PHONY: all clean

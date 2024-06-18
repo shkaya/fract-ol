@@ -3,7 +3,7 @@
 int	handle_key(int keycode, t_data *data)
 {
     // ESCキーで終了
-    if (keycode == 65307)
+    if (keycode == KEY_ESC)
 	{
         mlx_destroy_window(data->mlx_ptr, data->win_ptr);
         exit(0);

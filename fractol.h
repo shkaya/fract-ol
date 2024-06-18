@@ -8,7 +8,9 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define	MAX_ITER 100
+# define MAX_ITER 100
+
+# define KEY_ESC 65307
 
 typedef struct s_data
 {
@@ -26,7 +28,7 @@ void	init_mlx(t_data *data);
 
 // マンデルブロ集合を作る関数
 void	put_pixel_to_image(t_data *data, int x, int y, int color);
-int	get_color(int iter, int max);
+int		get_color(int iter, int max);
 void	draw_mandelbrot(t_data *data);
 
 // ジュリア集合を作る関数

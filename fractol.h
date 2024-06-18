@@ -6,18 +6,20 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define WIDTH 800
-# define HEIGHT 600
-# define MAX_ITER 100
+# define WIDTH		800
+# define HEIGHT		600
+# define MAX_ITER	100
 
 // 環境によってkeyに割り当てられている数字が異なる。
-# define KEY_ESC 65307
-# define KEY_PLUS 61
-# define KEY_MINUS 45
-# define KEY_LEFT 65361
-# define KEY_RIHGT 65363
-# define KEY_UP 65362
-# define KEY_DOWN 65364
+# define KEY_ESC	65307
+# define KEY_PLUS	61
+# define KEY_MINUS	45
+# define KEY_LEFT	65361
+# define KEY_RIGHT	65363
+# define KEY_UP		65362
+# define KEY_DOWN	65364
+# define MOUSE_SCROLL_UP	5
+# define MOUSE_SCROLL_DOWN	4
 
 typedef struct s_data
 {
@@ -31,6 +33,8 @@ typedef struct s_data
 	double	scale;
 	double	offset_x;
     double	offset_y;
+    double	c_re;
+    double	c_im;
 }				t_data;
 
 // mlx,window,imgを作成する関数

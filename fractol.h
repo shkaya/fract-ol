@@ -5,6 +5,7 @@
 # include "minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 # define WIDTH		800
 # define HEIGHT		600
@@ -40,6 +41,9 @@ typedef struct s_data
 // mlx,window,imgを作成する関数
 void	init_mlx(t_data *data);
 
+// 文字列をdouble型の数値に変換する(atof)
+double	my_atof(const char *str);
+
 // マンデルブロ集合を作る関数
 void	put_pixel_to_image(t_data *data, int x, int y, int color);
 int		get_color(int iter, int max);
@@ -47,5 +51,10 @@ void	draw_mandelbrot(t_data *data);
 
 // ジュリア集合を作る関数
 void	draw_julia(t_data *data, double c_re, double c_im);
+
+// 各イベントに対する処理をする関数
+int		handle_key(int keycode, t_data *data);
+int		handle_mouse(int button, int x, int y, t_data *data);
+int		handle_close(t_data *data);
 
 #endif

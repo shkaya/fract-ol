@@ -1,82 +1,69 @@
 #include "fractol.h"
-#include <stdio.h>
 
-/* キーイベントを処理する関数　*/
-// なぜか引数に、入力されたkeyに当たる数字が渡されている。
-// mlx_key_hookに渡す関数は必ずkeycodeを受け取れるようにしておかなければいけない？
-int	handle_key(int keycode, t_data *data)
+void	ft_putstr_fd(char *s, int fd)
 {
-	printf("key pass: %d\n", keycode);
-    // ESCキーで終了
-    if (keycode == KEY_ESC)
-	{
-        mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-        exit(0);
-    }
-    if (keycode == KEY_PLUS)
-    	data->scale /= 1.1;
-    if (keycode == KEY_MINUS)
-    	data->scale *= 1.1;
-	// "* scale"によってそのスケールに適した動きになる。
-    if (keycode == KEY_LEFT)
-    	data->offset_x -= 0.1 * data->scale;
-    if (keycode == KEY_RIGHT)
-    	data->offset_x += 0.1 * data->scale;
-    if (keycode == KEY_UP)
-    	data->offset_y -= 0.1 * data->scale;
-    if (keycode == KEY_DOWN)
-    	data->offset_y += 0.1 * data->scale;
-	draw_julia(data, data->c_re, data->c_im);
-    return (0);
+	size_t	i;
+	char	*p;
+
+	i = 0;
+	if (s == (char *)0)
+		return ;
+	p = s;
+	while (*s++)
+		i++;
+	write(fd, p, i);
 }
 
-/* マウスイベントを処理する関数　*/
-// x, yはマウスイベントが発生した時のwindow座標(x < WIDTH && y < HEIGHT)
-int	handle_mouse(int button, int x, int y, t_data *data)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	printf("button: %d (%d,%d)\n", button, x, y);
-	if (x < WIDTH && y < HEIGHT)
+	while (*s1 != '\0' && *s2 != '\0')
 	{
-		if (button == MOUSE_SCROLL_UP)
-			data->scale /= 1.1;
-		if (button == MOUSE_SCROLL_DOWN)
-			data->scale *= 1.1;
-		draw_julia(data, data->c_re, data->c_im);
+		if (*s1 != *s2)
+			return ((unsigned char)*s1 - (unsigned char)*s2);
+		s1++;
+		s2++;
 	}
-	return (0);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
-/* ウィンドウイベントを処理する関数　*/
-int	handle_close(t_data *data)
+// イベントハンドリングを関数化
+void	setup_hooks(t_data *data)
 {
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	exit(0);
-	return (0);
-}
-
-int main(void)
-{
-	// // マンデルブロ集合
-	// t_data	data;
-    // init_mlx(&data);
-    // draw_mandelbrot(&data);
-
-	// ジュリア集合
-    t_data	data;
-	init_mlx(&data);
-	data.c_re = -0.7;
-	data.c_im = 0.27015;
-    draw_julia(&data, data.c_re, data.c_im);
-
 	// キーボードイベントハンドラを設定
-	mlx_key_hook(data.win_ptr, handle_key, &data);
+	mlx_key_hook(data->win_ptr, handle_key, &data);
 	// マウスイベントハンドラを設定
-	mlx_mouse_hook(data.win_ptr, handle_mouse, &data);
+	mlx_mouse_hook(data->win_ptr, handle_mouse, &data);
 	// ウィンドウの×ボタンイベントハンドラを設定
 	// '17': 'DestroyNotify' ウィンドウが閉じられた時のイベント。監視対象のだった時に検証される。
 	// '1L<<17': 'StructureNotifyMask' ウィンドウの構造に関連するイベント(閉じる、サイズ変更など)を監視。
-	mlx_hook(data.win_ptr, 17, 1L<<17, handle_close, &data);
+	mlx_hook(data->win_ptr, 17, 1L<<17, handle_close, &data);
+}
 
+#include <stdio.h>
+int	main(int argc, char *argv[])
+{
+	t_data	data;
+
+	if (argc < 2)
+	{
+		ft_putstr_fd("Error", 1);
+		exit(EXIT_FAILURE);
+	}
+	init_mlx(&data);
+	if (ft_strcmp(argv[1], "mandelbrot") == 0)
+		draw_mandelbrot (&data);
+	else if (ft_strcmp(argv[1], "julia") == 0 && argc == 4)
+	{
+		data.c_re = my_atof(argv[2]);
+		data.c_im = my_atof(argv[3]);
+		draw_julia(&data, data.c_re, data.c_im);
+	}
+	else
+	{
+		ft_putstr_fd("Error", 1);
+		exit(EXIT_FAILURE);
+	}
+	setup_hooks(&data);
 	mlx_loop(data.mlx_ptr);
-    return (0);
+	return (0);
 }

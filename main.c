@@ -46,6 +46,14 @@ int	handle_mouse(int button, int x, int y, t_data *data)
 	return (0);
 }
 
+/* ウィンドウイベントを処理する関数　*/
+int	handle_close(t_data *data)
+{
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	exit(0);
+	return (0);
+}
+
 int main(void)
 {
 	// // マンデルブロ集合
@@ -62,7 +70,12 @@ int main(void)
 
 	// キーボードイベントハンドラを設定
 	mlx_key_hook(data.win_ptr, handle_key, &data);
+	// マウスイベントハンドラを設定
 	mlx_mouse_hook(data.win_ptr, handle_mouse, &data);
+	// ウィンドウの×ボタンイベントハンドラを設定
+	// '17': 'DestroyNotify' ウィンドウが閉じられた時のイベント。監視対象のだった時に検証される。
+	// '1L<<17': 'StructureNotifyMask' ウィンドウの構造に関連するイベント(閉じる、サイズ変更など)を監視。
+	mlx_hook(data.win_ptr, 17, 1L<<17, handle_close, &data);
 
 	mlx_loop(data.mlx_ptr);
     return (0);

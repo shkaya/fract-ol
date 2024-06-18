@@ -30,13 +30,13 @@ int	ft_strcmp(const char *s1, const char *s2)
 void	setup_hooks(t_data *data)
 {
 	// キーボードイベントハンドラを設定
-	mlx_key_hook(data->win_ptr, handle_key, &data);
+	mlx_key_hook(data->win_ptr, handle_key, data);
 	// マウスイベントハンドラを設定
-	mlx_mouse_hook(data->win_ptr, handle_mouse, &data);
+	mlx_mouse_hook(data->win_ptr, handle_mouse, data);
 	// ウィンドウの×ボタンイベントハンドラを設定
 	// '17': 'DestroyNotify' ウィンドウが閉じられた時のイベント。監視対象のだった時に検証される。
 	// '1L<<17': 'StructureNotifyMask' ウィンドウの構造に関連するイベント(閉じる、サイズ変更など)を監視。
-	mlx_hook(data->win_ptr, 17, 1L<<17, handle_close, &data);
+	mlx_hook(data->win_ptr, 17, 1L<<17, handle_close, data);
 }
 
 #include <stdio.h>

@@ -2,7 +2,7 @@ CC = gcc
 NAME = fractol
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = minilibx-linux/libmlx_Darwin.a -L/usr/X11/lib -lX11 -lXext -lm
-SRCS = mlx.c \
+SRCS = init_mlx.c \
 	mandelbrot.c \
 	julia.c \
 

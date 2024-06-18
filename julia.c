@@ -6,8 +6,6 @@ void	draw_julia(t_data *data, double c_re, double c_im)
     double z_re, z_im, z_re2, z_im2;
     int iter;
     int color;
-    // scaleを小さくすれば座標が拡大される。
-    double	scale = 1;
 
 	for (int y = 0; y < HEIGHT; y++)
     {
@@ -17,8 +15,9 @@ void	draw_julia(t_data *data, double c_re, double c_im)
             	画面を複素平面とみなし、各点を集合の初項とし,
             	複素数cは固定したまま反復計算して発散するかどうか調べる。
             */
-			z_re = scale * (x - WIDTH / 2.0) * (4.0 / WIDTH);
-            z_im = scale * (y - HEIGHT / 2.0) * (4.0 / HEIGHT);
+            // 実験結果: scaleを小さくすれば座標が拡大される。　直感的にはわからん。
+			z_re = data->scale * (x - WIDTH / 2.0) * (4.0 / WIDTH) + data->offset_x;
+            z_im = data->scale * (y - HEIGHT / 2.0) * (4.0 / HEIGHT) + data->offset_y;
             iter = 0;
             while (iter < MAX_ITER)
             {

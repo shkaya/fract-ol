@@ -18,4 +18,7 @@ void	init_mlx(t_data *data)
     }
     data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
     data->addr = mlx_get_data_addr(data->img_ptr, &data->bpp, &data->size_line, &data->endian);
+	data->scale = 1.0;
+    data->offset_x = 0;
+    data->offset_y = 0;
 }

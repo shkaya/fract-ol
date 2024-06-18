@@ -4,7 +4,7 @@
 void	put_pixel_to_image(t_data *data, int x, int y, int color)
 {
     int	pixel;
-	
+
     // 先頭からの対象のピクセルまでのバイト数。
     pixel = ((y * data->size_line) + x * (data->bpp / 8));
 	// 通常は1ピクセル = 4バイトなので一倍とずつ色のデータを格納していく。
@@ -58,8 +58,8 @@ void	draw_mandelbrot(t_data *data)
             */
             // 画面の各ピクセルを -2.0 ~ 2.0 の範囲の座標に変える。(正規化)
             // x(実部), y(虚部(iの係数))をそれぞれ求める。
-            c_re = (x - WIDTH / 2) * (4.0 / WIDTH); //実部
-            c_im = (y - HEIGHT / 2) * (4.0 / HEIGHT); //虚部
+            c_re = data->scale * (x - WIDTH / 2) * (4.0 / WIDTH); //実部
+            c_im = data->scale * (y - HEIGHT / 2) * (4.0 / HEIGHT); //虚部
             // 繰り返し計算をし、発散するか確認。
             z_re = c_re;
             z_im = c_im;

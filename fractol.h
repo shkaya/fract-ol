@@ -45,10 +45,14 @@ void	init_mlx(t_data *data);
 // 文字列をdouble型の数値に変換する(atof)
 double	my_atof(const char *str);
 
-// マンデルブロ集合を作る関数
+// 色を操作する関数
 void	put_pixel_to_image(t_data *data, int x, int y, int color);
 int		get_color(int iter, int max);
+
+// マンデルブロ集合を作る関数
 void	draw_mandelbrot(t_data *data);
+int		handle_key_mandelbrot(int keycode, t_data *data);
+int		handle_mouse_mandelbrot(int button, int x, int y, t_data *data);
 
 // ジュリア集合に関する関数
 void	draw_julia(t_data *data, double c_re, double c_im);

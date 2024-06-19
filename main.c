@@ -2,48 +2,6 @@
 
 /*  mlx系関数の引数を間違えて渡すと大体segvが起きます　*/
 
-// キーイベントの処理を扱う関数
-int	handle_key_mandelbrot(int keycode, t_data *data)
-{
-	printf("key pass: %d\n", keycode);
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		exit(0);
-	}
-    if (keycode == KEY_PLUS)
-    	data->scale /= 1.1;
-    if (keycode == KEY_MINUS)
-    	data->scale *= 1.1;
-	// "* scale"によってそのスケールに適した動きになる。
-    if (keycode == KEY_LEFT)
-    	data->offset_x -= 0.1 * data->scale;
-    if (keycode == KEY_RIGHT)
-    	data->offset_x += 0.1 * data->scale;
-    if (keycode == KEY_UP)
-    	data->offset_y -= 0.1 * data->scale;
-    if (keycode == KEY_DOWN)
-    	data->offset_y += 0.1 * data->scale;
-	draw_mandelbrot(data);
-	return (0);
-}
-
-// マウスイベントの処理を扱う関数
-int	handle_mouse_mandelbrot(int button, int x, int y, t_data *data)
-{
-	printf("button: %d (%d,%d)\n", button, x, y);
-	if (x < WIDTH && y < HEIGHT)
-	{
-		if (button == MOUSE_SCROLL_UP)
-			data->scale /= 1.1;
-		if (button == MOUSE_SCROLL_DOWN)
-			data->scale *= 1.1;
-		draw_julia(data, data->c_re, data->c_im);
-	}
-	draw_mandelbrot(data);
-	return (0);
-}
-
 // イベントハンドリングを関数化
 void	setup_hooks(t_data *data)
 {
@@ -89,6 +47,16 @@ static int	decide_fractol(int argc, char **argv, t_data *data)
 	}
 }
 
+// 再描画する関数
+int	expose_hook(t_data *data)
+{
+	if (data->what_fractal == 1)
+		draw_mandelbrot(data);
+	else if (data->what_fractal == 2)
+		draw_julia(data, data->c_re, data->c_im);
+	return (0);
+}
+
 #include <stdio.h>
 int	main(int argc, char *argv[])
 {
@@ -103,6 +71,8 @@ int	main(int argc, char *argv[])
 	data.what_fractal = decide_fractol(argc, argv, &data);
 	if (data.what_fractal == -1)
 		exit(EXIT_FAILURE);
+	// ウィンドウが再表示された時に再描画する関数. "expose" = 現れる？
+	mlx_expose_hook(data.win_ptr, expose_hook, &data);
 	setup_hooks(&data);
 	mlx_loop(data.mlx_ptr);
 	return (0);

@@ -5,18 +5,8 @@
 // イベントハンドリングを関数化
 void	setup_hooks(t_data *data)
 {
-	if (data->what_fractal == 2)
-	{
-		// キーボードイベントハンドラを設定
-		mlx_key_hook(data->win_ptr, handle_key_julia, data);
-		// マウスイベントハンドラを設定
-		mlx_mouse_hook(data->win_ptr, handle_mouse_julia, data);
-	}
-	else if (data->what_fractal == 1)
-	{
-		mlx_key_hook(data->win_ptr, handle_key_mandelbrot, data);
-		mlx_mouse_hook(data->win_ptr, handle_mouse_mandelbrot, data);
-	}
+	mlx_key_hook(data->win_ptr, handle_key, data);
+	mlx_mouse_hook(data->win_ptr, handle_mouse, data);
 	// ウィンドウの×ボタンイベントハンドラを設定
 	// '17': 'DestroyNotify' ウィンドウが閉じられた時のイベント。監視対象のだった時に検証される。
 	// '1L<<17': 'StructureNotifyMask' ウィンドウの構造に関連するイベント(閉じる、サイズ変更など)を監視。
@@ -25,7 +15,7 @@ void	setup_hooks(t_data *data)
 }
 
 // 受け取った文字列がどのフラクタルか判断する関数。
-// error -> -1, mandelbrot -> 1, fractol -> 2
+// error -> -1, mandelbrot -> 1, fractol -> 2, burningship -> 3
 static int	decide_fractol(int argc, char **argv, t_data *data)
 {
 	if (ft_strcmp(argv[1], "mandelbrot") == 0)
@@ -39,6 +29,11 @@ static int	decide_fractol(int argc, char **argv, t_data *data)
 		data->c_im = my_atof(argv[3]);
 		draw_julia(data, data->c_re, data->c_im);
 		return (2);
+	}
+	else if (ft_strcmp(argv[1], "burningship") == 0)
+	{
+		draw_burning_ship(data);
+		return (3);
 	}
 	else
 	{
@@ -54,6 +49,8 @@ int	expose_hook(t_data *data)
 		draw_mandelbrot(data);
 	else if (data->what_fractal == 2)
 		draw_julia(data, data->c_re, data->c_im);
+	else if (data->what_fractal == 3)
+		draw_burning_ship(data);
 	return (0);
 }
 

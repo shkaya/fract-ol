@@ -1,17 +1,27 @@
 #include "fractol.h"
 
-/* キーイベントを処理する関数　*/
+static int	draw_fractal(t_data *data)
+{
+	if (data->what_fractal == 1)
+		draw_mandelbrot(data);
+	else if (data->what_fractal == 2)
+		draw_julia(data, data->c_re, data->c_im);
+	else if (data->what_fractal == 3)
+		draw_burning_ship(data);
+	return (0);
+}
+
+// キーイベントの処理を扱う関数
 // なぜか引数に、入力されたkeyに当たる数字が渡されている。
 // mlx_key_hookに渡す関数は必ずkeycodeを受け取れるようにしておかなければいけない？
-int	handle_key_julia(int keycode, t_data *data)
+int	handle_key(int keycode, t_data *data)
 {
 	printf("key pass: %d\n", keycode);
-    // ESCキーで終了
-    if (keycode == KEY_ESC)
+	if (keycode == KEY_ESC)
 	{
-        mlx_destroy_window(data->mlx_ptr, data->win_ptr); // 引数を間違えたことによりsegv発生
-        exit(0);
-    }
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr); // 引数を間違えたことによりsegv発生
+		exit(0);
+	}
 	// 座標の動きが顕微鏡のよう。
     if (keycode == KEY_PLUS)
     	data->scale /= 1.1;
@@ -26,13 +36,13 @@ int	handle_key_julia(int keycode, t_data *data)
     	data->offset_y -= 0.1 * data->scale;
     if (keycode == KEY_DOWN)
     	data->offset_y += 0.1 * data->scale;
-	draw_julia(data, data->c_re, data->c_im);
-    return (0);
+    draw_fractal(data);
+	return (0);
 }
 
-/* マウスイベントを処理する関数　*/
+// マウスイベントの処理を扱う関数
 // x, yはマウスイベントが発生した時のwindow内座標(x < WIDTH && y < HEIGHT)
-int	handle_mouse_julia(int button, int x, int y, t_data *data)
+int	handle_mouse(int button, int x, int y, t_data *data)
 {
 	printf("button: %d (%d,%d)\n", button, x, y);
 	if (x < WIDTH && y < HEIGHT)
@@ -43,6 +53,7 @@ int	handle_mouse_julia(int button, int x, int y, t_data *data)
 			data->scale *= 1.1;
 		draw_julia(data, data->c_re, data->c_im);
 	}
+    draw_fractal(data);
 	return (0);
 }
 

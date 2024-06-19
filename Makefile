@@ -5,8 +5,8 @@ LDFLAGS = minilibx-linux/libmlx_Darwin.a -L/usr/X11/lib -lX11 -lXext -lm
 SRCS = init_mlx.c \
 	mandelbrot.c \
 	julia.c \
-	handle_julia.c \
-	handle_mandelbrot.c \
+	burningship.c \
+	handle.c \
 	utils.c \
 	atof.c	\
 

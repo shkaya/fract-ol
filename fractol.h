@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
 # define WIDTH		800
 # define HEIGHT		600
@@ -51,15 +52,16 @@ int		get_color(int iter, int max);
 
 // マンデルブロ集合を作る関数
 void	draw_mandelbrot(t_data *data);
-int		handle_key_mandelbrot(int keycode, t_data *data);
-int		handle_mouse_mandelbrot(int button, int x, int y, t_data *data);
 
 // ジュリア集合に関する関数
 void	draw_julia(t_data *data, double c_re, double c_im);
-int		handle_key_julia(int keycode, t_data *data);
-int		handle_mouse_julia(int button, int x, int y, t_data *data);
+
+// バーニングシップフラクタルに関する関数
+void	draw_burning_ship(t_data *data);
 
 // 各イベントに対する処理をする関数
+int		handle_key(int keycode, t_data *data);
+int		handle_mouse(int button, int x, int y, t_data *data);
 int		handle_close(t_data *data);
 
 // ヘルパー関数

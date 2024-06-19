@@ -12,6 +12,7 @@ int	handle_key_julia(int keycode, t_data *data)
         mlx_destroy_window(data->mlx_ptr, data->win_ptr); // 引数を間違えたことによりsegv発生
         exit(0);
     }
+	// 座標の動きが顕微鏡のよう。
     if (keycode == KEY_PLUS)
     	data->scale /= 1.1;
     if (keycode == KEY_MINUS)

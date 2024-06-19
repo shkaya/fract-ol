@@ -19,7 +19,7 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color)
 int	get_color(int iter, int max)
 {
     if (iter == max)
-    	return (0x000000);
+    	return (0x00000000);
     /*
 		発散する点(0<t<1)は*色付きで、発散していない点(t = 1)は黒で表現する。
         発散しない点: tが0または1に近い時　-> 成分は0に近くなる(黒に近づく)
@@ -66,13 +66,13 @@ void	draw_mandelbrot(t_data *data)
             iter = 0;
             while (iter < MAX_ITER)
             {
-                iter++;
                 z_re2 = z_re * z_re;
                 z_im2 = z_im * z_im;
-                if (z_re2 * z_im2 > 4.0)
+                if (z_re2 + z_im2 > 4.0)
                 	break; // 発散した時ループ終了。
                 z_re = z_re2 - z_im2 + c_re;
                 z_im = 2 * z_re * z_im + c_im;
+                iter++;
             }
             /*
             	各点に色をつけていく。

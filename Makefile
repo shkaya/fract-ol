@@ -5,7 +5,9 @@ LDFLAGS = minilibx-linux/libmlx_Darwin.a -L/usr/X11/lib -lX11 -lXext -lm
 SRCS = init_mlx.c \
 	mandelbrot.c \
 	julia.c \
-	handle.c \
+	handle_julia.c \
+	handle_mandelbrot.c \
+	utils.c \
 	atof.c	\
 
 OBJS = $(SRCS:%.c=%.o);

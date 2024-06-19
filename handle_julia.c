@@ -1,10 +1,9 @@
 #include "fractol.h"
-#include <stdio.h>
 
 /* キーイベントを処理する関数　*/
 // なぜか引数に、入力されたkeyに当たる数字が渡されている。
 // mlx_key_hookに渡す関数は必ずkeycodeを受け取れるようにしておかなければいけない？
-int	handle_key(int keycode, t_data *data)
+int	handle_key_julia(int keycode, t_data *data)
 {
 	printf("key pass: %d\n", keycode);
     // ESCキーで終了
@@ -32,7 +31,7 @@ int	handle_key(int keycode, t_data *data)
 
 /* マウスイベントを処理する関数　*/
 // x, yはマウスイベントが発生した時のwindow内座標(x < WIDTH && y < HEIGHT)
-int	handle_mouse(int button, int x, int y, t_data *data)
+int	handle_mouse_julia(int button, int x, int y, t_data *data)
 {
 	printf("button: %d (%d,%d)\n", button, x, y);
 	if (x < WIDTH && y < HEIGHT)

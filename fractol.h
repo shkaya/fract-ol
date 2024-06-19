@@ -24,18 +24,19 @@
 
 typedef struct s_data
 {
-    void	*mlx_ptr;
+	void	*mlx_ptr;
 	void	*win_ptr;
-    void	*img_ptr;
-    char 	*addr;
+	void	*img_ptr;
+	char	*addr;
 	int		bpp;
-    int		size_line;
-    int		endian;
+	int		size_line;
+	int		endian;
 	double	scale;
 	double	offset_x;
-    double	offset_y;
-    double	c_re;
-    double	c_im;
+	double	offset_y;
+	double	c_re;
+	double	c_im;
+	int		what_fractal;
 }				t_data;
 
 // mlx,window,imgを作成する関数
@@ -49,12 +50,16 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color);
 int		get_color(int iter, int max);
 void	draw_mandelbrot(t_data *data);
 
-// ジュリア集合を作る関数
+// ジュリア集合に関する関数
 void	draw_julia(t_data *data, double c_re, double c_im);
+int		handle_key_julia(int keycode, t_data *data);
+int		handle_mouse_julia(int button, int x, int y, t_data *data);
 
 // 各イベントに対する処理をする関数
-int		handle_key(int keycode, t_data *data);
-int		handle_mouse(int button, int x, int y, t_data *data);
 int		handle_close(t_data *data);
+
+// ヘルパー関数
+void	ft_putstr_fd(char *s, int fd);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

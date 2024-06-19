@@ -58,8 +58,8 @@ void	draw_mandelbrot(t_data *data)
             */
             // 画面の各ピクセルを -2.0 ~ 2.0 の範囲の座標に変える。(正規化)
             // x(実部), y(虚部(iの係数))をそれぞれ求める。
-            c_re = data->scale * (x - WIDTH / 2) * (4.0 / WIDTH); //実部
-            c_im = data->scale * (y - HEIGHT / 2) * (4.0 / HEIGHT); //虚部
+            c_re = data->scale * (x - WIDTH / 2) * (4.0 / WIDTH) + data->offset_x; //実部
+            c_im = data->scale * (y - HEIGHT / 2) * (4.0 / HEIGHT) + data->offset_y;//虚部
             // 繰り返し計算をし、発散するか確認。
             z_re = c_re;
             z_im = c_im;

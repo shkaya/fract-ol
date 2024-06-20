@@ -27,4 +27,6 @@ clean:
 		$(MAKE) clean -C ./minilibx-linux
 		rm -f *.o
 
-.PHONY: all clean
+re: clean all
+
+.PHONY: all clean re

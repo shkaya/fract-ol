@@ -45,15 +45,22 @@ int	handle_key(int keycode, t_data *data)
 int	handle_mouse(int button, int x, int y, t_data *data)
 {
 	printf("button: %d (%d,%d)\n", button, x, y);
-	if (x < WIDTH && y < HEIGHT)
+	if ((x < WIDTH && y < HEIGHT) && (button == MOUSE_SCROLL_UP
+			|| button == MOUSE_SCROLL_DOWN))
 	{
+		if (data->mouse_x != x || data->mouse_y != y)
+		{
+			data->offset_x = data->offset_x + (x - WIDTH / 2.0) * 4.0 / WIDTH * data->scale;
+			data->offset_y = data->offset_y + (y - HEIGHT / 2.0) * 4.0 / HEIGHT * data->scale;
+		}
 		if (button == MOUSE_SCROLL_UP)
 			data->scale /= 1.1;
 		if (button == MOUSE_SCROLL_DOWN)
 			data->scale *= 1.1;
-		draw_julia(data, data->c_re, data->c_im);
+		data->mouse_x = x;
+		data->mouse_y = y;
+		draw_fractal (data);
 	}
-    draw_fractal(data);
 	return (0);
 }
 

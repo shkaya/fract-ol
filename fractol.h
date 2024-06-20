@@ -38,6 +38,8 @@ typedef struct s_data
 	double	c_re;
 	double	c_im;
 	int		what_fractal;
+	int		mouse_x;
+	int		mouse_y;
 }				t_data;
 
 // mlx,window,imgを作成する関数

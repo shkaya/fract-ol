@@ -22,6 +22,7 @@ void	draw_burning_ship(t_data *data)
 				z_im2 = z_im * z_im;
 				if (z_re2 + z_im2 > 4.0)
 					break;
+				// fabs() ... 絶対値を取ってくれる関数
 				z_re = fabs(z_re);
 				z_im = fabs(z_im);
 				z_im =	2 * z_re * z_im + c_im;

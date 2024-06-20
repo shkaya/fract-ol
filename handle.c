@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-static int	draw_fractal(t_data *data)
+int	draw_fractal(t_data *data)
 {
 	if (data->what_fractal == 1)
 		draw_mandelbrot(data);

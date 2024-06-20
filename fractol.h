@@ -63,6 +63,7 @@ void	draw_burning_ship(t_data *data);
 int		handle_key(int keycode, t_data *data);
 int		handle_mouse(int button, int x, int y, t_data *data);
 int		handle_close(t_data *data);
+int		draw_fractal(t_data *data);
 
 // ヘルパー関数
 void	ft_putstr_fd(char *s, int fd);

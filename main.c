@@ -42,18 +42,6 @@ static int	decide_fractol(int argc, char **argv, t_data *data)
 	}
 }
 
-// 再描画する関数
-int	expose_hook(t_data *data)
-{
-	if (data->what_fractal == 1)
-		draw_mandelbrot(data);
-	else if (data->what_fractal == 2)
-		draw_julia(data, data->c_re, data->c_im);
-	else if (data->what_fractal == 3)
-		draw_burning_ship(data);
-	return (0);
-}
-
 #include <stdio.h>
 int	main(int argc, char *argv[])
 {
@@ -69,7 +57,7 @@ int	main(int argc, char *argv[])
 	if (data.what_fractal == -1)
 		exit(EXIT_FAILURE);
 	// ウィンドウが再表示された時に再描画する関数. "expose" = 現れる？
-	mlx_expose_hook(data.win_ptr, expose_hook, &data);
+	mlx_expose_hook(data.win_ptr, draw_fractal, &data);
 	setup_hooks(&data);
 	mlx_loop(data.mlx_ptr);
 	return (0);

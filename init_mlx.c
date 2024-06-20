@@ -8,9 +8,11 @@ void	init_mlx(t_data *data)
     if (!data->mlx_ptr)
     {
         fprintf(stderr, "Error: Failed to obtain context\n");
+		free(data->name);
     	exit(EXIT_FAILURE);
     }
-    data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, "Fractol");
+    data->win_ptr = mlx_new_window(data->mlx_ptr, WIDTH, HEIGHT, data->name);
+	free (data->name);
     if (!data->win_ptr)
     {
         fprintf(stderr, "Error: Failed to create window\n");

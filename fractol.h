@@ -7,6 +7,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <math.h>
+# include <stdlib.h>
 
 # define WIDTH		800
 # define HEIGHT		600
@@ -27,6 +28,7 @@
 
 typedef struct s_data
 {
+	char	*name;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
@@ -73,5 +75,6 @@ int		draw_fractal(t_data *data);
 // ヘルパー関数
 void	ft_putstr_fd(char *s, int fd);
 int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strdup(const char *s1);
 
 #endif

@@ -52,6 +52,9 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("Error\n", 1);
 		exit(EXIT_FAILURE);
 	}
+	data.name = ft_strdup(argv[1]);
+	if (!data.name)
+		exit(EXIT_FAILURE);
 	init_mlx(&data);
 	data.what_fractal = decide_fractol(argc, argv, &data);
 	if (data.what_fractal == -1)

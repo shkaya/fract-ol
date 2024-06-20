@@ -36,6 +36,10 @@ int	handle_key(int keycode, t_data *data)
     	data->offset_y -= 0.1 * data->scale;
     if (keycode == KEY_DOWN)
     	data->offset_y += 0.1 * data->scale;
+	if (keycode == KEY_COLOR_UP)
+		data->color_shift += 10;
+	if (keycode == KEY_COLOR_DOWN)
+		data->color_shift -= 10;
     draw_fractal(data);
 	return (0);
 }

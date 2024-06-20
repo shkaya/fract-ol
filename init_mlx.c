@@ -21,4 +21,5 @@ void	init_mlx(t_data *data)
 	data->scale = 1.0;
     data->offset_x = 0.0;
     data->offset_y = 0.0;
+    data->color_shift = 0;
 }

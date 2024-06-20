@@ -16,7 +16,7 @@ void	put_pixel_to_image(t_data *data, int x, int y, int color)
 }
 
 // カラーマッピングをする関数
-int	get_color(int iter, int max)
+int	get_color(t_data *data, int iter, int max)
 {
 	if (iter == max)
     	return (0x00000000);
@@ -37,6 +37,13 @@ int	get_color(int iter, int max)
     	int	b = (int)(8.5 * (1 - t) * (1 - t) * (1 - t) * t * 256); // 青色成分の計算
     	// (1 - t)とtがあることで、どちらかに偏っていた時、必ず0に近くなる。
         // いい感じのグラデーションになるらしい。
+
+    	// カラーシフト
+        // 一つの成分が256以上にならないように　"% 256" をつけた。
+        r = (r + data->color_shift) % 256;
+		g = (g + data->color_shift) % 256;
+        b = (b + data->color_shift) % 256;
+
     	return (r << 16 | g << 8 | b);
     }
 }
@@ -79,7 +86,7 @@ void	draw_mandelbrot(t_data *data)
             	反復計算の回数(iter)が多いほど、色が濃くなるようにする。
             */
         	// 反復回数に基づいて色の深さを決める関数。
-            color = get_color(iter, MAX_ITER);
+            color = get_color(data, iter, MAX_ITER);
         	// 画像に色をつけていく関数。
             put_pixel_to_image(data, x, y, color);
         }

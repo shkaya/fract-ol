@@ -22,6 +22,8 @@
 # define KEY_DOWN	65364
 # define MOUSE_SCROLL_UP	5
 # define MOUSE_SCROLL_DOWN	4
+# define KEY_COLOR_UP 46
+# define KEY_COLOR_DOWN 44
 
 typedef struct s_data
 {
@@ -40,6 +42,7 @@ typedef struct s_data
 	int		what_fractal;
 	int		mouse_x;
 	int		mouse_y;
+	int		color_shift;
 }				t_data;
 
 // mlx,window,imgを作成する関数
@@ -50,7 +53,7 @@ double	my_atof(const char *str);
 
 // 色を操作する関数
 void	put_pixel_to_image(t_data *data, int x, int y, int color);
-int		get_color(int iter, int max);
+int		get_color(t_data *data, int iter, int max);
 
 // マンデルブロ集合を作る関数
 void	draw_mandelbrot(t_data *data);

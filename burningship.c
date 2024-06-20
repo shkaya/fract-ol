@@ -29,7 +29,7 @@ void	draw_burning_ship(t_data *data)
 				z_re = z_re2 - z_im2 + c_re;
 				iter++;
 			}
-			color = get_color(iter, MAX_ITER);
+			color = get_color(data, iter, MAX_ITER);
 			put_pixel_to_image(data, x, y, color);
 		}
 	}

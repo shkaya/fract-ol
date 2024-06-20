@@ -5,7 +5,6 @@ minilibx-linuxは別途ダウンロードする必要あり
 # 仕様
 [Mandatory]
 windowの名前をfractalごとに変える必要あり？
-mandelbrot描写時、ズームすると一瞬々楕円の図形が映るが問題なし?
 [Bonus]
 カラー変化: ADキーでhsvのhを10度ずつ変化させる(?)
 

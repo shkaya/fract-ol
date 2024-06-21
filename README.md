@@ -31,6 +31,7 @@ exmaple:
 
 ### julia
 <img src = "https://github.com/shkaya/fract-ol/blob/main/img/julia.png" width="500" height="450">
+
 ```
 param: [a(double)] [b(double)]
 ```
@@ -45,6 +46,7 @@ exmple:
 
 ### burningshp
 <img src = "https://github.com/shkaya/fract-ol/blob/main/img/burningship.png" width="500" height="450">
+
 The Buriningship set is given as the set of points C that converge with the following asymptotic formula
 ```
 z_0 = 0, z_n+1 = (|z_n|)ˆ2 + |c|

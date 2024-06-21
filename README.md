@@ -37,7 +37,7 @@ param: [a(double)] [b(double)]
 ```
 The julia set is given as the set of points z_0 that converge with the following asymptotic formula
 ```
-z_n+1 = (z_n)ˆ2 + c, c = a + bi; 
+z_n+1 = (z_n)ˆ2 + c, c = a + bi
 ```
 exmple:
 ```

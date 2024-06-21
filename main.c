@@ -1,4 +1,4 @@
-#include "fractol.h"
+#include "src/fractol.h"
 
 /*  mlx系関数の引数を間違えて渡すと大体segvが起きます　*/
 

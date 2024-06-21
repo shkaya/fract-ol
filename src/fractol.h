@@ -2,7 +2,7 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-# include "minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>

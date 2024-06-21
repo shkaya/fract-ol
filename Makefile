@@ -2,13 +2,13 @@ CC = gcc
 NAME = fractol
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = minilibx-linux/libmlx_Darwin.a -L/usr/X11/lib -lX11 -lXext -lm
-SRCS = init_mlx.c \
-	mandelbrot.c \
-	julia.c \
-	burningship.c \
-	handle.c \
-	utils.c \
-	atof.c	\
+SRCS = src/init_mlx.c \
+	src/mandelbrot.c \
+	src/julia.c \
+	src/burningship.c \
+	src/handle.c \
+	src/utils.c \
+	src/atof.c	\
 
 OBJS = $(SRCS:%.c=%.o);
 
@@ -25,7 +25,7 @@ $(NAME): $(OBJS)
 
 clean:
 		$(MAKE) clean -C ./minilibx-linux
-		rm -f *.o
+		rm -f $(OBJS)
 
 re: clean all
 

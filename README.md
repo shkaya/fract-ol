@@ -4,3 +4,11 @@
 
 ## Overview
 I made a program to draw fractol shapes in C language
+
+##Usage
+
+```
+git clone https://github.com/shkaya/fract-ol.git
+cd fract-ol
+make
+```

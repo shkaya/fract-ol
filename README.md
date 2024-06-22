@@ -12,13 +12,13 @@ I made a program to draw fractol shapes in C language
 Xquartz
 ```
 xquartz --version
-brew install --cask xquartz
+(brew install --cask xquartz)
 ```
 X11
 ```
 xlsclients
 xeyes
-brew install xeyes
+(brew install xeyes)
 ```
 
 ### after installation

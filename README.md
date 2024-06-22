@@ -21,6 +21,7 @@ xeyes
 brew install xeyes
 ```
 
+### after installation
 ```
 git clone https://github.com/shkaya/fract-ol.git
 cd fract-ol

@@ -14,33 +14,67 @@ void	setup_hooks(t_data *data)
 	return;
 }
 
-// 受け取った文字列がどのフラクタルか判断する関数。
-// error -> -1, mandelbrot -> 1, fractol -> 2, burningship -> 3
+static int	is_num(char *str)
+{
+	while (*str != '\0')
+	{
+		if (*str < '0' || '9' < *str)
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
+// 受け取った文字列がどのフラクタルか判断する関数。改
 static int	decide_fractol(int argc, char **argv, t_data *data)
 {
-	if (ft_strcmp(argv[1], "mandelbrot") == 0)
+	// [正規表現]　./fractol mandelbrot
+	if (ft_strcmp(argv[1], "mandelbrot") == 0 && argc == 2)
 	{
-		draw_mandelbrot (data);
 		return (1);
 	}
-	else if (ft_strcmp(argv[1], "julia") == 0 && argc == 4)
+	// [正規表現] ./fractol julia <数値> <数値>
+	else if (ft_strcmp(argv[1], "julia") == 0 && argc == 4 && is_num(argv[2]) && is_num(argv[3]))
 	{
 		data->c_re = my_atof(argv[2]);
 		data->c_im = my_atof(argv[3]);
-		draw_julia(data, data->c_re, data->c_im);
 		return (2);
-	}
-	else if (ft_strcmp(argv[1], "burningship") == 0)
-	{
-		draw_burning_ship(data);
-		return (3);
 	}
 	else
 	{
-		ft_putstr_fd("Error:\n", 1);
+		ft_putstr_fd("[Valid] ./fractol mandelbrot\n", 1);
+		ft_putstr_fd("        ./fractol julia <num> <num>\n", 1);
 		return (-1);
 	}
 }
+
+// 受け取った文字列がどのフラクタルか判断する関数。
+// error -> -1, mandelbrot -> 1, julia -> 2, burningship -> 3
+// static int	decide_fractol(int argc, char **argv, t_data *data)
+// {
+// 	if (ft_strcmp(argv[1], "mandelbrot") == 0)
+// 	{
+// 		draw_mandelbrot (data);
+// 		return (1);
+// 	}
+// 	else if (ft_strcmp(argv[1], "julia") == 0 && argc == 4)
+// 	{
+// 		data->c_re = my_atof(argv[2]);
+// 		data->c_im = my_atof(argv[3]);
+// 		draw_julia(data, data->c_re, data->c_im);
+// 		return (2);
+// 	}
+// 	else if (ft_strcmp(argv[1], "burningship") == 0)
+// 	{
+// 		draw_burning_ship(data);
+// 		return (3);
+// 	}
+// 	else
+// 	{
+// 		ft_putstr_fd("Error:\n", 1);
+// 		return (-1);
+// 	}
+// }
 
 #include <stdio.h>
 int	main(int argc, char *argv[])
@@ -55,8 +89,10 @@ int	main(int argc, char *argv[])
 	data.name = ft_strdup(argv[1]);
 	if (!data.name)
 		exit(EXIT_FAILURE);
-	init_mlx(&data);
 	data.what_fractal = decide_fractol(argc, argv, &data);
+	init_mlx(&data);
+	draw_fractal(&data);
+	//data.what_fractal = decide_fractol(argc, argv, &data);
 	if (data.what_fractal == -1)
 		exit(EXIT_FAILURE);
 	// ウィンドウが再表示された時に再描画する関数. "expose" = 現れる？

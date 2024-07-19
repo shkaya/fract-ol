@@ -44,6 +44,7 @@ static int	decide_fractol(int argc, char **argv, t_data *data)
 	{
 		ft_putstr_fd("[Valid] ./fractol mandelbrot\n", 1);
 		ft_putstr_fd("        ./fractol julia <num> <num>\n", 1);
+		free(data->name);
 		return (-1);
 	}
 }
@@ -90,11 +91,11 @@ int	main(int argc, char *argv[])
 	if (!data.name)
 		exit(EXIT_FAILURE);
 	data.what_fractal = decide_fractol(argc, argv, &data);
+	if (data.what_fractal == -1)
+		exit(EXIT_FAILURE);
 	init_mlx(&data);
 	draw_fractal(&data);
 	//data.what_fractal = decide_fractol(argc, argv, &data);
-	if (data.what_fractal == -1)
-		exit(EXIT_FAILURE);
 	// ウィンドウが再表示された時に再描画する関数. "expose" = 現れる？
 	mlx_expose_hook(data.win_ptr, draw_fractal, &data);
 	setup_hooks(&data);
